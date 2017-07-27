@@ -37,6 +37,7 @@ app.get('/api/securedata',function(req,res){
     if(req.headers.token){
         jwt.verify(req.headers.token,authConfig.secretKey,function(err,decoded){
             if(err){
+                res.writeHead(401);
                 res.end('token no valido');
             }else{
                 res.writeHead(200, {'Content-Type': 'application/json'});
@@ -44,6 +45,7 @@ app.get('/api/securedata',function(req,res){
             }
         });
     }else{
+        res.writeHead(401);
         res.end('sin token');
     }
 });
@@ -56,10 +58,11 @@ app.get('/api/nonsecuredata',function(req,res){
 app.post('/api/authenticate',function(req,res){
     if(req.body.password === userAuth.password){
         var token = jwt.sign({user:userAuth.user}, authConfig.secretKey, {expiresIn:authConfig.expirationTime});
+        res.end(token);
     }else{
-        console.log("error de password")
+        res.writeHead(400);
+        res.end("error de usuario o password");
     }
-    res.end(token);
 });
 
 var server = app.listen(3700,function(){
