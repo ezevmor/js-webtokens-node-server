@@ -1,0 +1,22 @@
+{"prescripcion":
+    [
+        {
+            "medicamento":"Ibuprofeno",
+            "id":"1",
+            "dosis":"25mg",
+            "tasaAdherencia":"85%"
+        },
+        {
+            "medicamento":"Paracetamol",
+            "id":"2",
+            "dosis":"500mg",
+            "tasaAdherencia":"75%"
+        },
+        {
+            "medicamento":"Acetilcisteina",
+            "id":"3",
+            "dosis":"1000mg",
+            "tasaAdherencia":"95%"
+        }
+    ]
+}

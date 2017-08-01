@@ -3,6 +3,10 @@ var jwt = require('jsonwebtoken');
 var bodyParser = require('body-parser');
 var authConfig = require('./auth-config');
 
+//archivos JSON
+var prescripcion = require('./JSON/prescripcion.json');
+var horas = require('./JSON/horasAdministracion.json');
+
 var app = express();
 app.use(bodyParser.json()); //habilita la recepcion de datos desde body en formato json
 app.use(bodyParser.urlencoded({ extended: false })); //habilita la recepcion de datos desde body en formato application/x-www-form-urlencoded
@@ -50,15 +54,30 @@ app.get('/api/securedata',function(req,res){
     }
 });
 
+app.get('/api/nonsecuredata/:fileName',function(req,res){
+    try{
+        var requestFile = require('./JSON/'+req.params.fileName+'.json');
+        res.end(JSON.stringify(requestFile));
+    }
+    catch(error){
+        res.writeHead(400);
+        res.end('no existe el recurso ' + req.params.fileName+'.json')
+    }
+});
+
 app.get('/api/nonsecuredata',function(req,res){
     res.writeHead(200, {'Content-Type': 'application/json'});
     res.end(JSON.stringify(jsonData));
 });
 
+
+
 app.post('/api/authenticate',function(req,res){
     if(req.body.password === userAuth.password){
-        var token = jwt.sign({user:userAuth.user}, authConfig.secretKey, {expiresIn:authConfig.expirationTime});
-        res.end(token);
+        var data = {
+            token: jwt.sign({user:userAuth.user}, authConfig.secretKey, {expiresIn:authConfig.expirationTime})
+        }
+        res.end(JSON.stringify(data));
     }else{
         res.writeHead(400);
         res.end("error de usuario o password");

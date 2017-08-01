@@ -1,0 +1,46 @@
+[
+  {
+    "idMedicamento":"1",
+    "horas": [
+      {
+        "hora":"10:00",
+        "estado":"administrado"
+      },
+      {
+        "hora":"16:00",
+        "estado":"administrado"
+      },
+      {
+        "hora":"22:00",
+        "estado":"administrado"
+      }
+    ]
+  },
+  {
+    "idMedicamento":"2",
+    "horas":
+      [
+        {
+          "hora":"9:00",
+          "estado":"administrado"
+        },
+        {
+          "hora":"15:00",
+          "estado":"administrado"
+        },
+        {
+          "hora":"21:00",
+          "estado":"administrado"
+        }
+      ]
+  },
+  {
+    "idMedicamento":"3",
+    "horas":[
+      {
+        "hora":"9:00",
+        "estado":"administrado"
+      }
+    ]
+  }
+]
